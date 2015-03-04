@@ -10,7 +10,7 @@ var createBaseModel = function (path, others) {
     var baseModel = {
       findAll: function () {
           return client({path: path})
-              .then(function (response) {return response.entity;});
+              .then(returnEntity);
       }
     };
     if (others) {
