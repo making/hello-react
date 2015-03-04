@@ -1,4 +1,3 @@
-var React = require('react');
 var rest = require('rest');
 var mime = require('rest/interceptor/mime');
 var pathPrefix = require('rest/interceptor/pathPrefix');
