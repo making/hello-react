@@ -6,23 +6,29 @@ var pathPrefix = require('rest/interceptor/pathPrefix');
 var client = rest.wrap(mime)
     .wrap(pathPrefix, {prefix: 'http://blog.ik.am/api/v1/'});
 
+
+var createBaseModel = function (path, others) {
+    var baseModel = {
+      findAll: function () {
+          return client({path: path})
+              .then(function (response) {return response.entity;});
+      }
+    };
+    if (others) {
+        for (prop in others) {
+            baseModel[prop] = others[prop];
+        }
+    }
+    return baseModel;
+};
+
 var returnEntity = function (response) {
     return response.entity;
 }
 
-var RecentPostsModel = {
-    findAll: function () {
-        return client({path: 'recentposts'})
-            .then(returnEntity);
-    }
-}
+var RecentPostsModel = createBaseModel('recentposts');
 
-var LinksModel = {
-    findAll: function () {
-        return client({path: 'links'})
-            .then(returnEntity);
-    }
-};
+var LinksModel = createBaseModel('links');
 
 var EntriesModel = {
     findAll: function (page, size) {
@@ -42,19 +48,9 @@ var EntriesModel = {
     }
 };
 
-var TagsModel = {
-    findAll: function () {
-        return client({path: 'tags'})
-            .then(returnEntity);
-    }
-};
+var TagsModel = createBaseModel('tags');
 
-var CategoriesModel = {
-    findAll: function () {
-        return client({path: 'categoriess'})
-            .then(returnEntity);
-    }
-};
+var CategoriesModel = createBaseModel('links');
 
 module.exports = {
     RecentPostsModel: RecentPostsModel,

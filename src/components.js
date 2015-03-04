@@ -35,7 +35,7 @@ var TagList = React.createClass({
     render: function () {
         var tags = this.props.data.map(function (tag) {
             return (
-                <Tag tagName={tag.tagName}/>
+                <Tag key={tag.tagName} tagName={tag.tagName}/>
             );
         });
         return (
@@ -46,8 +46,9 @@ var TagList = React.createClass({
 
 var Tag = React.createClass({
     render: function () {
+        var url = 'http://blog.ik.am/#/tags/' + this.props.tagName + '/entries';
         return (
-            <li>{this.props.tagName}</li>
+            <li><a href={url}>{this.props.tagName}</a></li>
         );
     }
 });
