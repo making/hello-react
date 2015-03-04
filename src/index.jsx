@@ -1,5 +1,5 @@
 var React = require('react');
-var HelloWorld = require('./components.js');
+var HelloWorld = require('./views.jsx');
 
 React.render(
     <HelloWorld />,

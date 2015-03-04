@@ -6,7 +6,7 @@ var reactify = require('reactify');
 var uglify = require('gulp-uglify');
 
 gulp.task('browserify', function () {
-    return browserify('./src/index.js', {
+    return browserify('./src/index.jsx', {
         debug: true,
         transform: [reactify]
     })
@@ -18,5 +18,5 @@ gulp.task('browserify', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch('src/*.js', ['browserify']);
+    gulp.watch('src/**/*.jsx', ['browserify']);
 });
