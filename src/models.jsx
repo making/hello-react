@@ -1,8 +1,10 @@
 var rest = require('rest');
 var mime = require('rest/interceptor/mime');
 var pathPrefix = require('rest/interceptor/pathPrefix');
+var defaultRequest = require('rest/interceptor/defaultRequest');
 
 var client = rest.wrap(mime)
+    .wrap(defaultRequest, {headers: {'X-Formatted': 'true'}})
     .wrap(pathPrefix, {prefix: 'http://blog.ik.am/api/v1/'});
 
 

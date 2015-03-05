@@ -17,16 +17,16 @@ var EntriesView = React.createClass({
             }.bind(this));
     },
     handlePageChanged: function (newPage) {
-        this.setState({
-            number: newPage
-        });
+        models.EntriesModel.findAll(newPage, this.state.size)
+            .then(function (x) {
+                this.setState(x);
+            }.bind(this));
     },
     render: function () {
         var param = '?page=' + this.state.number + '&size=' + this.state.size;
         return (
             <div>
                 <EntryList data={this.state.content} />
-                <span>{param}</span>
                 <Pager total={this.state.totalPages}
                     current={this.state.number}
                     visiblePages={5}
@@ -44,7 +44,7 @@ var EntryList = React.createClass({
             );
         });
         return (
-            <ul>{entries}</ul>
+            <div>{entries}</div>
         );
     }
 });
@@ -52,7 +52,10 @@ var EntryList = React.createClass({
 var Entry = React.createClass({
     render: function () {
         return (
-            <li>{this.props.entry.title}</li>
+            <div>
+              <h2>{this.props.entry.title}</h2>
+              <div dangerouslySetInnerHTML={{__html: this.props.entry.contents}} />
+            </div>
         );
     }
 });
