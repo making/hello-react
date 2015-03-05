@@ -40,7 +40,7 @@ var EntryList = React.createClass({
     render: function () {
         var entries = this.props.data.map(function (entry) {
             return (
-                <Entry entryId={entry.entryId} entry={entry}/>
+                <Entry key={entry.entryId} entry={entry}/>
             );
         });
         return (
@@ -50,12 +50,27 @@ var EntryList = React.createClass({
 });
 
 var Entry = React.createClass({
+    getInitialState: function () {
+        return {
+            contentsVisible: 'invisible',
+            buttonVisible: 'visible'
+        };
+    },
+    handleClick: function () {
+        this.setState({
+            contentsVisible: 'visible',
+            buttonVisible: 'invisible'
+        });
+    },
     render: function () {
         return (
-            <div>
-              <h2>{this.props.entry.title}</h2>
-              <div dangerouslySetInnerHTML={{__html: this.props.entry.contents}} />
-            </div>
+            <article>
+                <h2>{this.props.entry.title}</h2>
+                <button className={this.state.buttonVisible}
+                    onClick={this.handleClick}>Read this article</button>
+                <div className={this.state.contentsVisible}
+                    dangerouslySetInnerHTML={{__html: this.props.entry.contents}} />
+            </article>
         );
     }
 });
