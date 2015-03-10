@@ -1,6 +1,7 @@
 var React = require('react');
 var models = require('../models.jsx');
 var Pager = require('react-pager');
+var EntryView = require('./EntryView.jsx');
 
 var EntriesView = React.createClass({
     getInitialState: function () {
@@ -21,6 +22,7 @@ var EntriesView = React.createClass({
             .then(function (x) {
                 this.setState(x);
             }.bind(this));
+        window.scroll(0, 0);
     },
     render: function () {
         var param = '?page=' + this.state.number + '&size=' + this.state.size;
@@ -40,7 +42,7 @@ var EntryList = React.createClass({
     render: function () {
         var entries = this.props.data.map(function (entry) {
             return (
-                <Entry key={entry.entryId} entry={entry}/>
+                <EntryView key={entry.entryId} entry={entry}/>
             );
         });
         return (
@@ -48,32 +50,5 @@ var EntryList = React.createClass({
         );
     }
 });
-
-var Entry = React.createClass({
-    getInitialState: function () {
-        return {
-            contentsVisible: 'invisible',
-            buttonVisible: 'visible'
-        };
-    },
-    handleClick: function () {
-        this.setState({
-            contentsVisible: 'visible',
-            buttonVisible: 'invisible'
-        });
-    },
-    render: function () {
-        return (
-            <article>
-                <h2>{this.props.entry.title}</h2>
-                <button className={this.state.buttonVisible}
-                    onClick={this.handleClick}>Read this article</button>
-                <div className={this.state.contentsVisible}
-                    dangerouslySetInnerHTML={{__html: this.props.entry.contents}} />
-            </article>
-        );
-    }
-});
-
 
 module.exports = EntriesView;
