@@ -51,7 +51,7 @@ var EntriesModel = {
 
 var TagsModel = createBaseModel('tags');
 
-var CategoriesModel = createBaseModel('links');
+var CategoriesModel = createBaseModel('categories');
 
 module.exports = {
     RecentPostsModel: RecentPostsModel,

@@ -1,7 +1,7 @@
 var React = require('react');
 var models = require('../models.jsx');
 var Pager = require('react-pager');
-var EntryView = require('./EntryView.jsx');
+var EntryComponent = require('./EntryComponent.jsx');
 
 var EntriesView = React.createClass({
     getInitialState: function () {
@@ -42,7 +42,7 @@ var EntryList = React.createClass({
     render: function () {
         var entries = this.props.data.map(function (entry) {
             return (
-                <EntryView key={entry.entryId} entry={entry}/>
+                <EntryComponent key={entry.entryId} entry={entry}/>
             );
         });
         return (

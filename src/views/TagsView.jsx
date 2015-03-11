@@ -14,6 +14,7 @@ var TagsView = React.createClass({
     render: function () {
         return (
             <div>
+                <h2>All Tags</h2>
                 <TagList data={this.state.data} />
             </div>
         );

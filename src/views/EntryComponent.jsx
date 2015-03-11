@@ -1,7 +1,7 @@
 var React = require('react');
 var models = require('../models.jsx');
 
-var EntryView = React.createClass({
+var EntryComponent = React.createClass({
     getInitialState: function () {
         return {
             contentsVisible: 'invisible',
@@ -28,4 +28,4 @@ var EntryView = React.createClass({
 });
 
 
-module.exports = EntryView;
+module.exports = EntryComponent;
